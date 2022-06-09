@@ -121,6 +121,7 @@ case 'menu': case 'help': case '?': {
   let menu = `
 ╔════════
 ╠══ *OWNER MENU*
+╠ ${prefix}chat
 ╠ ${prefix}bc
 ╠ ${prefix}bcgc
 ╠ ${prefix}join
@@ -267,6 +268,22 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
   break
 
 //Owner Menu
+case 'chat': {
+if (!isOwner) return m.reply(mess.botOwner)
+if (!args.join(" ")) return m.reply(`Example :\n${prefix + command} 6213xxxx|Apa kabar`)
+const cpace = args.join(" ")
+const nony = cpace.split("|")[0];
+if (nony.length <12) return m.reply('master number sayad galat hain👀')
+const massage = cpace.split("|")[1];
+lol = `*| CHAT ICHIGO |*
+Message from ichi
+Number : @${m.sender.split("@")[0]}
+Message : ${massage}`
+ichi.sendMessage(nony + "@s.whatsapp.net", {text:lol, mentions:[m.sender]}, {quoted:m})
+}
+await m.reply("Succes")
+break
+
 case 'bcgc': case 'bcgroup': {
   if (!isOwner && !m.key.fromMe) return m.reply(mess.botOwner)
   if (!text) throw `Text mana?\n\nExample : ${prefix + command} ${global.ownerName}`
