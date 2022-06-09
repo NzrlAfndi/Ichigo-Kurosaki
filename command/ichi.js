@@ -273,7 +273,6 @@ if (!isOwner) return m.reply(mess.botOwner)
 if (!args.join(" ")) return m.reply(`Example :\n${prefix + command} 6213xxxx|Apa kabar`)
 const cpace = args.join(" ")
 const nony = cpace.split("|")[0];
-if (nony.length <12) return m.reply('master number sayad galat hain👀')
 const massage = cpace.split("|")[1];
 lol = `*| CHAT ICHIGO |*
 Message from ichi
