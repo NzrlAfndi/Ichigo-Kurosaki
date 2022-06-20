@@ -30,7 +30,7 @@ done: 'Done!'
 //Sesuaikan
 global.thumb = fs.readFileSync('./media/ichi.jpeg')
 global.donasi = fs.readFileSync('./media/donasi.jpg')
-global.thumbnail = fs.readFileSync('./media/ichi.mp4')
+global.thumbnail = fs.readFileSync('./media/ichi.jpg')
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
