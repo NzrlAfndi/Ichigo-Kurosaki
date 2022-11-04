@@ -50,7 +50,7 @@ const cloudDBAdapter = require('../lib/cloudDBAdapter')
 
 
 global.db = new Low(
-	new JSONFile(`./storage/db.json`)
+	new JSONFile(`./database/datas.json`)
 )
 global.DATABASE = global.db // Backwards Compatibility
 global.loadDatabase = async function loadDatabase() {
@@ -91,7 +91,7 @@ font: 'block',
 gradient: ['red','magenta'],
 align: 'center'
 })
-cfonts.say('Whatsapp Bot By Fandyyy',{
+cfonts.say('Whatsapp Bot By',{
 font: 'console',
 gradient: ['red','magenta'],
 align: 'center'
@@ -101,7 +101,7 @@ try{
 const ichi = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ["Ichigo Kurosaki", "Safari", "3.0"],
+browser: ["whatsbot", "Safari", "3.0"],
 auth: state
 })
 
@@ -145,7 +145,7 @@ if(!anu.participants.includes(ichi.user.jid) ) {
       ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
       } else if (anu.action == 'remove') {
       let metadata = await ichi.groupMetadata(anu.id)
-      teksbye = `Sayonaraa @${num.split("@")[0]} 👋`
+      teksbye = `Good Bye @${num.split("@")[0]} 👋`
       ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: teksbye })
       } else if (anu.action == 'promote') {
       let metadata = await ichi.groupMetadata(anu.id)
