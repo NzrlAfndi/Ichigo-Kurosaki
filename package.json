@@ -23,7 +23,7 @@
   "author": "Fandyyy",
   "license": "MIT",
   "dependencies": {
-    "@adiwajshing/baileys": "github:FERDIZ-afk/Baileys",
+    "@adiwajshing/baileys": "github:hostinger-bot/baileys",
     "@adiwajshing/keyed-db": "latest",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@hapi/boom": "^10.0.0",
