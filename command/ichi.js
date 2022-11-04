@@ -168,104 +168,200 @@ break;
 
 case 'menu': case 'help': case '?': {
   let menu = `
-╔════════
-╠══ *OWNER MENU*
-╠ ${prefix}bc
-╠ ${prefix}bcgc
-╠ ${prefix}join
-╠ ${prefix}leave
-╠ ${prefix}block
-╠ ${prefix}unblock
-╠ ${prefix}setppbot
-╠ ${prefix}self
-╠ ${prefix}public
-╠ ${prefix}eval
-╚════════
+╭──❍ *Info*
+│⭔ Runtime: ${runtime(process.uptime())}
+│⭔ Disk: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+│
+╰────❍
+╭──❍ *Owner Menu*
+│⭔ ${prefix}bc
+│⭔ ${prefix}bcgc
+│⭔ ${prefix}join
+│⭔ ${prefix}leave
+│⭔ ${prefix}block
+│⭔ ${prefix}unblock
+│⭔ ${prefix}setppbot
+│⭔ ${prefix}self
+│⭔ ${prefix}public
+│⭔ ${prefix}eval
+│
+╰────❍
+
+╭──❍ *Group Menu*
+│⭔ ${prefix}antilink
+│⭔ ${prefix}Antidelete
+│⭔ ${prefix}antiviewone
+│⭔ ${prefix}linkgroup
+│⭔ ${prefix}revoke
+│⭔ ${prefix}kick
+│⭔ ${prefix}add
+│⭔ ${prefix}promote
+│⭔ ${prefix}demote
+│⭔ ${prefix}setname
+│⭔ ${prefix}setdesk
+│⭔ ${prefix}setppgrup
+│⭔ ${prefix}tagall
+│⭔ ${prefix}hidetag
+│⭔ ${prefix}ephemeral
+│
+╰────❍
+
+╭──❍ *Maker Menu*
+│⭔ ${prefix}sticker
+│⭔ ${prefix}toimg
+│⭔ ${prefix}tovideo
+│⭔ ${prefix}toaudio
+│⭔ ${prefix}tomp3
+│⭔ ${prefix}tovn
+│⭔ ${prefix}togif
+│⭔ ${prefix}tourl
+│⭔ ${prefix}removebg
+│⭔ ${prefix}estetik
+│⭔ ${prefix}ktpmaker
+│
+╰────❍
+
+╭──❍ *Random Menu*
+│⭔ ${prefix}pinterest
+│⭔ ${prefix}wallpaper
+│⭔ ${prefix}quotesanime
+│⭔ ${prefix}wikimedia
+│
+╰────❍
+
+╭──❍ *Other Menu*
+│⭔ ${prefix}delete
+│⭔ ${prefix}donasi
+│⭔ ${prefix}sewa
+│⭔ ${prefix}sc
+│⭔ ${prefix}owner
+│⭔ ${prefix}ping / ${prefix}runtime
+│⭔ ${prefix}menu / ${prefix}help / ${prefix}?
+│
+╰────❍
+
+╭──❍ *Download Menu*
+│⭔ ${prefix}play
+│⭔ ${prefix}yts
+│⭔ ${prefix}ytmp3
+│⭔ ${prefix}ytmp4
+│
+╰────❍`
+ /** ichi.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'INR',
+      amount1000: 79999999,
+      requestFrom: m.sender,
+      noteMessage: {
+      extendedTextMessage: {
+      text: menu,
+      contextInfo: {
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})**/
+       let buttons = [
+                {buttonId: `ping`, buttonText: {displayText: 'Ping'}, type: 1},
+                {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
+            ]
+            let buttonMessage = {
+                video: fs.readFileSync('./media/jpeg.mp4'),
+                caption: menu,
+                footer: global.ownerName,
+                buttons: buttons,
+                headerType: 5
+            }
+            ichi.sendMessage(m.chat, buttonMessage, { quoted: m })
   
-╔════════
-╠══ *GROUP MENU*
-╠ ${prefix}antilink
-╠ ${prefix}Antidelete
-╠ ${prefix}antiviewone
-╠ ${prefix}linkgroup
-╠ ${prefix}revoke
-╠ ${prefix}kick
-╠ ${prefix}add
-╠ ${prefix}promote
-╠ ${prefix}demote
-╠ ${prefix}setname
-╠ ${prefix}setdesk
-╠ ${prefix}setppgrup
-╠ ${prefix}tagall
-╠ ${prefix}hidetag
-╠ ${prefix}ephemeral
-╚════════
-  
-╔════════
-╠══ *MAKER MENU*
-╠ ${prefix}sticker
-╠ ${prefix}toimg
-╠ ${prefix}tovideo
-╠ ${prefix}toaudio
-╠ ${prefix}tomp3
-╠ ${prefix}tovn
-╠ ${prefix}togif
-╠ ${prefix}tourl
-╠ ${prefix}removebg
-╠ ${prefix}estetik
-╠ ${prefix}ktpmaker
-╚════════
-
-╔════════
-╠══ *RANDOM MENU*
-╠ ${prefix}pinterest
-╠ ${prefix}wallpaper
-╠ ${prefix}quotesanime
-╠ ${prefix}wikimedia
-╚════════
-
-╔════════
-╠══ *OTHER MENU*
-╠ ${prefix}delete
-╠ ${prefix}donasi
-╠ ${prefix}sewa
-╠ ${prefix}sc
-╠ ${prefix}owner
-╠ ${prefix}ping
-╠ ${prefix}menu / ${prefix}help / ${prefix}?
-╚════════
-
-╔════════
-╠══ *DOWNLOAD MENU*
-╠ ${prefix}play
-╠ ${prefix}yts
-╠ ${prefix}ytmp3
-╠ ${prefix}ytmp4
-╚════════
-  `
-  let but = [
-  {urlButton: {displayText: 'Source Code ♨️',url: 'https://github.com/NzrlAfndi/Ichigo-Kurosaki'}}, 
-  {urlButton: {displayText: 'Website 🔗',url: 'https://linktr.ee/nzrlafndi'}}, 
-  {"quickReplyButton": {"displayText": "Donasi 🗂️","id": `donasi`},},
-  {"quickReplyButton": {"displayText": "Owner 👦","id": "owner"},},
-  {"quickReplyButton": {"displayText": "Status Bot ⌚","id": `ping`}}
-  ]
-  ichi.sendButtonImg(m.chat, menu, global.ownerName, global.thumb, but, global.thumb)
+   //MENU2
+    /** ichi.relayMessage(m.chat, 
+        { orderMessage: { 
+        itemCount: 99999, status: 1,
+        message: menu,
+        thumbnail: fs.readFileSync('./media/ichi.jpeg'), 
+        contextInfo: m.quoted,
+}}, {})**/
   }
   break
 case 'donasi': case 'sewa': case 'sewabot': {
-  let donasi = `Scan QR Above To Donate
-
+  let donasi = `
+Untuk Payment nya Konfirmasi aja ke owner.\n
+Dana: 082221792667
+QR: https://telegra.ph/file/7f36042c813688f9ee435.jpg\n
 Rental Bot Prices :
 💰 10k/week
 💰 25k/month
 💰 100k/year`
-  let but = [{"quickReplyButton": {"displayText": "Owner 👦","id": "owner"}}]
-  ichi.sendButtonImg(m.chat, donasi, global.ownerName, global.donasi, but, global.donasi)
+let buttons = [
+                {buttonId: `ping`, buttonText: {displayText: 'Ping'}, type: 1},
+                {buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
+            ]
+            let buttonMessage = {
+                video: fs.readFileSync('./media/ayg.mp4'),
+                caption: donasi,
+                footer: global.ownerName,
+                buttons: buttons,
+                headerType: 5
+            }
+            ichi.sendMessage(m.chat, buttonMessage, { quoted: m })
+  /**ichi.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'INR',
+      amount1000: 15,
+      requestFrom: m.sender,
+      noteMessage: {
+      extendedTextMessage: {
+      text: donasi,
+      contextInfo: {
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})**/
   }
-  break
+ /** break
+/**case 'tiktokwm': case 'tiktokwatermark': {
+                if (!text) throw 'Masukkan Query Link!'
+                m.reply(mess.wait)
+                let anu = await fetchJson(`https://botcahx-rest-api.herokuapp.com/api/dowloader/tikok?url=${text}`)
+                let buttons = [
+                    {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: '► No Watermark'}, type: 1},
+                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: anu.result.video_original },
+                    caption: `Download From ${text}`,
+                    footer: nyoutube,
+                    buttons: buttons,
+                    headerType: 5
+                }
+                naze.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break**/
+            break
+            case 'delete': case 'del': {
+                if (!m.quoted) throw false
+                let { chat, fromMe, id, isBaileys } = m.quoted
+               /** if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'**/
+                ichi.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
+            }
+   break         
+   case 'speedtest': {
+            m.reply('Testing Speed...')
+            let cp = require('child_process')
+            let { promisify } = require('util')
+            let exec = promisify(cp.exec).bind(cp)
+          let o
+          try {
+          o = await exec('python2 speed.py --share --secure')
+          } catch (e) {
+          o = e
+         } finally {
+        let { stdout, stderr } = o
+        if (stdout.trim()) m.reply(stdout)
+        if (stderr.trim()) m.reply(stderr)
+            }
+            }
+     break
 case 'sc': case 'sourcecode': case 'script': {
-  m.reply('*Script Berasal Dari :* https://github.com/nzrlafndi/ichigo-kurosaki\n\nJangan Lupa Bintang nya!')
+  m.reply('*Script Berasal Dari :* https://github.com/nzrlafndi/ichigo-kurosaki\n\n https://github.com/BOTCAHX\n\n https://github.com/FERDIZ-afk\n\nJangan Lupa Bintang nya!')
   }
   break
 case 'owner': {
@@ -303,10 +399,12 @@ case 'ping': case 'botstatus': case 'statusbot': case 'speed': case 'tes': {
   neww = performance.now()
   oldd = performance.now()
   respon = `
-🏎️ Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
+ Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
 
 💻 Info Server
 RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
+
+Disk: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
 
 _NodeJS Memory Usaage_
 ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
@@ -319,7 +417,44 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
   m.reply(respon)
   }
   break
-
+// CASE RUNTIME 
+case 'runtime': case 'uptime': case 'server': case 'bot': {
+  const used = process.memoryUsage()
+  const cpus = os.cpus().map(cpu => {
+  cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
+  return cpu
+  })
+  const cpu = cpus.reduce((last, cpu, _, { length }) => {
+  last.total += cpu.total
+  last.speed += cpu.speed / length
+  last.times.user += cpu.times.user
+  last.times.nice += cpu.times.nice
+  last.times.sys += cpu.times.sys
+  last.times.idle += cpu.times.idle
+  last.times.irq += cpu.times.irq
+  return last
+  }, {
+  speed: 0,
+  total: 0,
+  times: {
+  user: 0,
+  nice: 0,
+  sys: 0,
+  idle: 0,
+  irq: 0
+  }
+  })
+  let timestamp = speed()
+  let latensi = speed() - timestamp
+  neww = performance.now()
+  oldd = performance.now()
+  respon = `
+  *───「 RUNTIME BOT 」───*
+ Runtime : ${runtime(process.uptime())}
+  `.trim()
+  m.reply(respon)
+}
+break
 //Owner Menu
 case 'bcgc': case 'bcgroup': {
   var fdoc = { key : { remoteJid: 'status@broadcast', participant : '0@s.whatsapp.net' }, message: { documentMessage: { title: 'B R O A D C A S T', jpegThumbnail: global.thumb, }}}
@@ -1046,7 +1181,7 @@ case 'play':
 
 //Eval
 default:
-if (budy.startsWith('=>')) {
+if (budy.startsWith('~>')) {
   if (!isOwner) return m.reply(mess.botOwner)
   function Return(sul) {
   sat = JSON.stringify(sul, null, 2)
@@ -1062,7 +1197,7 @@ if (budy.startsWith('=>')) {
   m.reply(String(e))
   }
   }  
-if (budy.startsWith('>')) {
+if (budy.startsWith('.>')) {
   if (!isOwner) return m.reply(mess.botOwner)
   try {
   let evaled = await eval(budy.slice(2))
