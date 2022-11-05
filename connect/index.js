@@ -40,7 +40,7 @@ const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
 global.authFile = `MysticSession`
-const { state, saveState, saveCreds } = useMultiFileAuthState(global.authFile)
+const { state, saveState } = useMultiFileAuthState(global.authFile)
 const ichi = {
 printQRInTerminal: true,
 auth: state,
