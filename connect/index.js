@@ -19,7 +19,7 @@ const {
 	downloadContentFromMessage,
 	makeInMemoryStore,
 	fetchLatestBaileysVersion,
-  MessageRetryMap, 
+        MessageRetryMap, 
 	jidDecode,
 	jidNormalizedUser,
 	proto
@@ -39,6 +39,9 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
+global.authFile = `sessions`
+const { state, saveState, saveCreds } = await useMultiFileAuthState(global.authFile)
+
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 //Starting In Console
@@ -96,19 +99,6 @@ if (global.db) setInterval(async () => {
 
 
 
-
-	const {
-		state,
-		saveCreds
-	} = useMultiFileAuthState('auth1')
-	
-	
-	const store = makeInMemoryStore({
-		logger: pino().child({
-			level: 'silent',
-			stream: 'store'
-		})
-	})
 
 async function startIchigo(){
   
