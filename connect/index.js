@@ -118,7 +118,7 @@ printQRInTerminal: true,
 auth: state,
 logger: pino({ level: 'silent'}),
 browser: ['cek','Safari','1.0.0']
-})
+}
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
 store.bind(ichi.ev)
