@@ -100,12 +100,12 @@ if (global.db) setInterval(async () => {
 	const {
 		state,
 		saveCreds
-	} = await useMultiFileAuthState('auth1')
+	} = useMultiFileAuthState('auth1')
 	
 	const {
 		version,
 		isLatest
-	} = await fetchLatestBaileysVersion()
+	} = fetchLatestBaileysVersion()
 	console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
 
 	const store = makeInMemoryStore({
