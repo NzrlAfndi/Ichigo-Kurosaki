@@ -39,8 +39,8 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-global.authFile = `MysticSession`
-const { state, saveState } = useMultiFileAuthState(global.authFile)
+global.authFile = `sessions`
+const { state, saveState, saveCreds } = useMultiFileAuthState(global.authFile)
 const ichi = {
 printQRInTerminal: true,
 auth: state,
@@ -117,17 +117,6 @@ font: 'console',
 gradient: ['red','magenta'],
 align: 'center'
 })
-
-try{
-/**const ichi = makeWASocket({
-		logger: pino({
-			level: 'silent'
-		}),
-		printQRInTerminal: true,
-		browser: ['bot', 'Safari', '1.0.0'],
-		auth: state,
-		markOnlineOnConnect: false
-})**/
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
 store.bind(ichi.ev)
