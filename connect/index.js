@@ -39,9 +39,14 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-global.authFile = `sessions`
-const { state, saveState, saveCreds } = useMultiFileAuthState(global.authFile)
-
+global.authFile = `MysticSession`
+const { state, saveState, saveCreds } = await useMultiFileAuthState(global.authFile)
+const connectionOptions = {
+printQRInTerminal: true,
+auth: state,
+logger: pino({ level: 'silent'}),
+browser: ['cek','Safari','1.0.0']
+}
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 //Starting In Console
@@ -100,7 +105,7 @@ if (global.db) setInterval(async () => {
 
 
 
-async function startIchigo(){
+/**async function startIchigo(){
   
 cfonts.say('bot',{
 font: 'block',
@@ -122,7 +127,7 @@ const ichi = makeWASocket({
 		browser: ['bot', 'Safari', '1.0.0'],
 		auth: state,
 		markOnlineOnConnect: false
-})
+})**/
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
 store.bind(ichi.ev)
