@@ -7,7 +7,7 @@
 
 require('../settings')
 const {
-  default: makeWASocket,,
+  default: makeWASocket,
   useSingleFileAuthState,
   useMultiFileAuthState,
   DisconnectReason, 
