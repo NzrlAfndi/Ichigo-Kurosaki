@@ -6,7 +6,7 @@
 */
 
 require('../settings')
-const { DisconnectReason, useMultiFileAuthState } = require('@adiwajshing/baileys')
+const { DisconnectReason, makeInMemoryStore, useMultiFileAuthState } = require('@adiwajshing/baileys')
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -25,6 +25,12 @@ const db = new dbog()
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
 global.authFile = `sessions`
 const { state, saveState, saveCreds } = useMultiFileAuthState(global.authFile)
+const store = makeInMemoryStore({
+		logger: pino().child({
+			level: 'silent',
+			stream: 'store'
+		})
+	})
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 //Starting In Console
