@@ -113,11 +113,15 @@ align: 'center'
 })
 
 try{
-const ichi = useMultiFileAuthState({
-logger: pino({ level: 'silent' }),
-printQRInTerminal: true,
-browser: ["whatsbot", "Safari", "3.0"],
-auth: state
+const ichi = makeWASocket({
+		version,
+		logger: Pino({
+			level: 'silent'
+		}),
+		printQRInTerminal: true,
+		browser: ['bot', 'Safari', '1.0.0'],
+		auth: state,
+		markOnlineOnConnect: false
 })
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
