@@ -37,8 +37,10 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-const authFile = `${opts._[0] || 'sessions'}`
-const { state, saveState, saveCreds } = useMultiFileAuthState('authFile')
+	const {
+		state,
+		saveCreds
+	} = await useMultiFileAuthState('auth1')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
