@@ -114,7 +114,6 @@ align: 'center'
 
 try{
 const ichi = makeWASocket({
-		version,
 		logger: Pino({
 			level: 'silent'
 		}),
