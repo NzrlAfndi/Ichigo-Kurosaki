@@ -37,6 +37,8 @@ const moment = require('moment-timezone')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
 const dbog = require('../lib/Database.js')
 const db = new dbog()
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
 global.authFile = `sessions`
