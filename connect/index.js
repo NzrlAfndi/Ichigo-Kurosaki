@@ -114,7 +114,7 @@ align: 'center'
 
 try{
 const ichi = makeWASocket({
-		logger: Pino({
+		logger: pino({
 			level: 'silent'
 		}),
 		printQRInTerminal: true,
