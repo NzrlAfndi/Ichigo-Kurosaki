@@ -36,8 +36,8 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-const { state, saveCreds } = useMultiFileAuthState(`./session/${sessionName}-session`)
-/**const { version, isLatest } = await fetchLatestBaileysVersion()**/
+const { state, saveCreds } = useMultiFileAuthState(`./session/sessions`)
+const { version, isLatest } = fetchLatestBaileysVersion()
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 //Starting In Console
