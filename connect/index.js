@@ -113,7 +113,7 @@ align: 'center'
 })
 
 try{
-const ichi = makeWASocket({
+const ichi = useMultiFileAuthState({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
 browser: ["whatsbot", "Safari", "3.0"],
