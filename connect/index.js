@@ -6,7 +6,22 @@
 */
 
 require('../settings')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, jidNormalizedUser, proto } = require("@adiwajshing/baileys")
+const {
+  makeWASocket,
+  useSingleFileAuthState,
+  useMultiFileAuthState,
+  DisconnectReason, 
+  AnyMessageContent, 
+  generateForwardMessageContent, 
+  prepareWAMessageMedia, 
+  generateWAMessageFromContent, 
+  generateMessageID, 
+  downloadContentFromMessage,
+  makeInMemoryStore, 
+  jidDecode, 
+  jidNormalizedUser, 
+  proto
+} = require('@adiwajshing/baileys')
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -22,7 +37,8 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-const { state, saveState } = useSingleFileAuthState(`./${global.sessionName}.json`)
+const authFile = `${opts._[0] || 'database'}`
+const { state, saveState, saveCreds } = await useMultiFileAuthState(authFile)
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
@@ -98,12 +114,19 @@ align: 'center'
 })
 
 try{
-const ichi = makeWASocket({
+const connectionOptions = {
+  printQRInTerminal: true,
+  auth: state,
+  logger: P({ level: 'debug' }),
+  logger: P({ level: 'silent' }),
+  version: [2, 2204, 13]
+})
+/**const ichi = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
 browser: ["whatsbot", "Safari", "3.0"],
 auth: state
-})
+})**/
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
 store.bind(ichi.ev)
