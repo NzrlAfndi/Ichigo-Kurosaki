@@ -9,6 +9,7 @@ require('../settings')
 const {
 	default: makeWASocket,
 	DisconnectReason,
+        makeInMemoryStore,
 	AnyMessageContent,
 	delay,
 	useMultiFileAuthState, 
