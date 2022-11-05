@@ -102,12 +102,7 @@ if (global.db) setInterval(async () => {
 		saveCreds
 	} = useMultiFileAuthState('auth1')
 	
-	const {
-		version,
-		isLatest
-	} = fetchLatestBaileysVersion()
-	console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
-
+	
 	const store = makeInMemoryStore({
 		logger: Pino().child({
 			level: 'silent',
