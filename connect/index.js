@@ -105,7 +105,7 @@ if (global.db) setInterval(async () => {
 
 
 
-/**async function startIchigo(){
+async function startIchigo(){
   
 cfonts.say('bot',{
 font: 'block',
@@ -119,7 +119,7 @@ align: 'center'
 })
 
 try{
-const ichi = makeWASocket({
+/**const ichi = makeWASocket({
 		logger: pino({
 			level: 'silent'
 		}),
