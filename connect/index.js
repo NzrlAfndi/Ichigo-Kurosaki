@@ -37,7 +37,7 @@ const dbog = require('../lib/Database.js')
 const db = new dbog()
 
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-const { state, saveState, saveCreds } = useMultiFileAuthState('./database')
+const { state, saveState, saveCreds } = useMultiFileAuthState('database')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
@@ -101,7 +101,7 @@ if (global.db) setInterval(async () => {
 
 async function startIchigo(){
   
-cfonts.say('ICHIGO',{
+cfonts.say('bot',{
 font: 'block',
 gradient: ['red','magenta'],
 align: 'center'
