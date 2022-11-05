@@ -8,7 +8,6 @@
 require('../settings')
 const {
   default: makeWASocket,
-  useSingleFileAuthState,
   useMultiFileAuthState,
   DisconnectReason, 
   AnyMessageContent, 
@@ -42,17 +41,6 @@ const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, awa
 		saveCreds
 	} = useMultiFileAuthState('auth1')
 const {
-		version,
-		isLatest
-	} = await fetchLatestBaileysVersion()
-	console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
-
-	const store = makeInMemoryStore({
-		logger: Pino().child({
-			level: 'silent',
-			stream: 'store'
-		})
-	})
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 //Starting In Console
