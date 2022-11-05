@@ -104,7 +104,7 @@ if (global.db) setInterval(async () => {
 	
 	
 	const store = makeInMemoryStore({
-		logger: Pino().child({
+		logger: pino().child({
 			level: 'silent',
 			stream: 'store'
 		})
