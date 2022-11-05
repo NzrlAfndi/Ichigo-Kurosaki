@@ -114,19 +114,12 @@ align: 'center'
 })
 
 try{
-const connectionOptions = {
-  printQRInTerminal: true,
-  auth: state,
-  logger: P({ level: 'debug' }),
-  logger: P({ level: 'silent' }),
-  version: [2, 2204, 13]
-})
-/**const ichi = makeWASocket({
+const ichi = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
 browser: ["whatsbot", "Safari", "3.0"],
 auth: state
-})**/
+})
 
 if (ichi.user && ichi.user.id) ichi.user.jid = jidNormalizedUser(ichi.user.id)
 store.bind(ichi.ev)
