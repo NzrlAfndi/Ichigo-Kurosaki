@@ -17,7 +17,6 @@ const {
 	generateWAMessageFromContent,
 	generateMessageID,
 	downloadContentFromMessage,
-	makeInMemoryStore,
 	fetchLatestBaileysVersion,
         MessageRetryMap, 
 	jidDecode,
