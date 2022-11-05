@@ -6,7 +6,7 @@
 */
 
 require('../settings')
-const { DisconnectReason, useMultiFileAuthState } = require('@adiwajshing/baileys')
+const { DisconnectReason, useMultiFileAuthState, makeInMemoryStore } = require('@adiwajshing/baileys')
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
