@@ -9,19 +9,7 @@ require('../settings')
 const {
 	default: makeWASocket,
 	DisconnectReason,
-	AnyMessageContent,
-	delay,
-	useMultiFileAuthState, 
-	generateForwardMessageContent,
-	prepareWAMessageMedia,
-	generateWAMessageFromContent,
-	generateMessageID,
-	downloadContentFromMessage,
-	fetchLatestBaileysVersion,
-        MessageRetryMap, 
-	jidDecode,
-	jidNormalizedUser,
-	proto
+	useMultiFileAuthState
 } = require('@adiwajshing/baileys')
 const pino = require('pino')
 const fs = require('fs')
